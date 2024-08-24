@@ -3,20 +3,18 @@ package com.example.diyestimateapp;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 public class MainActivity extends AppCompatActivity {
 
     private TextView txtMemory, txtResult;
-    private Button btn0, btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9;
-    private Button btnAdd, btnSub, btnMulti, btnDiv, btnDecimal, btnEqual;
+    private Button btn4, btn5, btn6, btn7, btn8, btn9;
     private Button btnAC, btnC, btnPercent;
+    private ImageButton button_send;
 
     private String input = "";
     private String operator = "";
@@ -32,10 +30,6 @@ public class MainActivity extends AppCompatActivity {
         txtResult = findViewById(R.id.txtResult);
 
         // Initialize Buttons
-        btn0 = findViewById(R.id.btn0);
-        btn1 = findViewById(R.id.btn1);
-        btn2 = findViewById(R.id.btn2);
-        btn3 = findViewById(R.id.btn3);
         btn4 = findViewById(R.id.btn4);
         btn5 = findViewById(R.id.btn5);
         btn6 = findViewById(R.id.btn6);
@@ -43,20 +37,24 @@ public class MainActivity extends AppCompatActivity {
         btn8 = findViewById(R.id.btn8);
         btn9 = findViewById(R.id.btn9);
 
-        btnAdd = findViewById(R.id.btnAdd);
-        btnSub = findViewById(R.id.btnSub);
-        btnMulti = findViewById(R.id.btnMulti);
-        btnDiv = findViewById(R.id.btnDiv);
-        btnDecimal = findViewById(R.id.btnDecimal);
-        btnEqual = findViewById(R.id.btnEqual);
-
         btnAC = findViewById(R.id.btnAC);
         btnC = findViewById(R.id.btnC);
         btnPercent = findViewById(R.id.btnPercent);
 
-        // Set onClickListeners
+        // Initialize button_send
+        button_send = findViewById(R.id.button_send);
+
+        // Set onClickListeners for numbers and operators
         setNumberListeners();
         setOperatorListeners();
+
+        // Set OnClickListener for button_send to show a Toast
+        button_send.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(MainActivity.this, "Send button clicked!", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void setNumberListeners() {
@@ -69,17 +67,12 @@ public class MainActivity extends AppCompatActivity {
             }
         };
 
-        btn0.setOnClickListener(listener);
-        btn1.setOnClickListener(listener);
-        btn2.setOnClickListener(listener);
-        btn3.setOnClickListener(listener);
         btn4.setOnClickListener(listener);
         btn5.setOnClickListener(listener);
         btn6.setOnClickListener(listener);
         btn7.setOnClickListener(listener);
         btn8.setOnClickListener(listener);
         btn9.setOnClickListener(listener);
-        btnDecimal.setOnClickListener(listener);
     }
 
     private void setOperatorListeners() {
@@ -94,18 +87,7 @@ public class MainActivity extends AppCompatActivity {
             }
         };
 
-        btnAdd.setOnClickListener(listener);
-        btnSub.setOnClickListener(listener);
-        btnMulti.setOnClickListener(listener);
-        btnDiv.setOnClickListener(listener);
         btnPercent.setOnClickListener(listener);
-
-        btnEqual.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                calculateResult();
-            }
-        });
 
         btnAC.setOnClickListener(new View.OnClickListener() {
             @Override
